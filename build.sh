@@ -56,7 +56,7 @@ pushd ~/rpmbuild/SOURCES
     
     # Misc Fixes
     pushd ~/rpmbuild/SOURCES
-    wget https://raw.githubusercontent.com/karlgray/nginx-pagespeed-modsecurity/master/nginx.vh.example_ssl.conf
+        wget https://raw.githubusercontent.com/karlgray/nginx-pagespeed-modsecurity/master/nginx.vh.example_ssl.conf
     mv nginx.init.in nginx.init
     popd
     C_INCLUDE_PATH=/usr/include/httpd/
@@ -81,7 +81,7 @@ rm -rf "$patch_dir"
 #Prep and patch the Nginx specfile for the RPMs
 pushd ~/rpmbuild/SPECS
 mv nginx.spec nginx.spec.orig
-wget https://raw.githubusercontent.com/karlgray/nginx-pagespeed-modsecurity/master/nginx.spec
+wget https://raw.githubusercontent.com/karlgray/nginx-rpm/nginx.spec
 rpmbuild -ba nginx.spec
 
 if ! [ $? -eq 0 ]; then

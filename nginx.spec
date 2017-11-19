@@ -101,8 +101,6 @@ Not stripped version of nginx built with the debugging log support.
 %prep
 %setup -q
 
-%{__tar} zxvf %{SOURCE11}
-%setup -T -D -a 11
 
 %{__tar} zxvf %{SOURCE7}
 %setup -T -D -a 7
