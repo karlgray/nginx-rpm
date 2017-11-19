@@ -101,7 +101,6 @@ Not stripped version of nginx built with the debugging log support.
 %prep
 %setup -q
 
-
 %{__tar} zxvf %{SOURCE7}
 %setup -T -D -a 7
 
@@ -185,8 +184,6 @@ make %{?_smp_mflags}
         --with-http_v2_module \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
         --with-cc=/opt/rh/devtoolset-2/root/usr/bin/gcc \
-        --add-module=%{_builddir}/%{name}-%{version}/ngx_pagespeed-release-%{pagespeed_version} \
-        --add-module=/etc/nginx/modules/modsecurity/nginx/modsecurity \
         --add-module=%{_builddir}/%{name}-%{version}/ngx_cache_purge \
         $*
 make %{?_smp_mflags}
