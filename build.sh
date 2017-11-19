@@ -50,34 +50,6 @@ pushd ~/rpmbuild/SOURCES
     git checkout 80db501
     popd
 
-    # Pagespeed module
-    sudo rpm --import https://linux.web.cern.ch/linux/scientific6/docs/repository/cern/slc6X/i386/RPM-GPG-KEY-cern
-    sudo wget -O /etc/yum.repos.d/slc6-devtoolset.repo https://linux.web.cern.ch/linux/scientific6/docs/repository/cern/devtoolset/slc6-devtoolset.repo
-    sudo yum install devtoolset-2-gcc-c++ devtoolset-2-binutils -y
-
-    NPS_VERSION=1.11.33.0
-    wget https://github.com/pagespeed/ngx_pagespeed/archive/release-${NPS_VERSION}-beta.zip -O release-${NPS_VERSION}-beta.zip
-    unzip release-${NPS_VERSION}-beta.zip
-    pushd ngx_pagespeed-release-${NPS_VERSION}-beta/
-    wget https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz
-    tar -xzvf ${NPS_VERSION}.tar.gz  # extracts to psol/
-    rm ${NPS_VERSION}.tar.gz
-    popd
-    tar cz ngx_pagespeed-release-${NPS_VERSION}-beta/ >ngx_pagespeed-release-${NPS_VERSION}-beta.tar.gz
-    rm release-${NPS_VERSION}-beta.zip
-    
-    
-    # Mod Security Module
-    git clone -b nginx_refactoring https://github.com/SpiderLabs/ModSecurity.git modsecurity
-    pushd modsecurity
-    ./autogen.sh
-    ./configure --enable-standalone-module
-    make
-    popd
-    sudo mkdir -p /etc/nginx/modules
-    tar cvf modsecurity.tar.gz modsecurity
-    sudo mv modsecurity /etc/nginx/modules
-    
     # Nginx Cache Purge
     git clone https://github.com/FRiCKLE/ngx_cache_purge.git
     tar cz ngx_cache_purge >ngx_cache_purge.tar.gz

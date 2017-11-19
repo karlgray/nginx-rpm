@@ -63,7 +63,7 @@ Release: 1%{?dist}.ngx
 Vendor: nginx inc.
 URL: http://nginx.org/
 
-%define pagespeed_version 1.13.35.1-beta
+
 Source0: http://nginx.org/download/%{name}-%{version}.tar.gz
 Source1: logrotate
 Source2: nginx.init
@@ -75,8 +75,6 @@ Source7: ngx_cache_purge.tar.gz
 Source8: nginx.service
 Source9: nginx.upgrade.sh
 Source10: nginx.suse.logrotate
-Source11: ngx_pagespeed-release-%{pagespeed_version}.tar.gz
-Source12: modsecurity.tar.gz
 License: 2-clause BSD-like license
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -125,6 +123,7 @@ Not stripped version of nginx built with the debugging log support.
         --http-uwsgi-temp-path=%{_localstatedir}/cache/nginx/uwsgi_temp \
         --http-scgi-temp-path=%{_localstatedir}/cache/nginx/scgi_temp \
         --user=%{nginx_user} \
+        --with-debug \
         --group=%{nginx_group} \
         --with-http_ssl_module \
         --with-http_realip_module \
@@ -147,8 +146,6 @@ Not stripped version of nginx built with the debugging log support.
         --with-http_v2_module \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
         --with-cc=/opt/rh/devtoolset-2/root/usr/bin/gcc \
-        --add-module=%{_builddir}/%{name}-%{version}/ngx_pagespeed-release-%{pagespeed_version} \
-        --add-module=/etc/nginx/modules/modsecurity/nginx/modsecurity \
         --add-module=%{_builddir}/%{name}-%{version}/ngx_cache_purge \
         $*
 make %{?_smp_mflags}
@@ -169,6 +166,7 @@ make %{?_smp_mflags}
         --http-scgi-temp-path=%{_localstatedir}/cache/nginx/scgi_temp \
         --user=%{nginx_user} \
         --group=%{nginx_group} \
+        --debug \
         --with-http_ssl_module \
         --with-http_realip_module \
         --with-http_addition_module \
