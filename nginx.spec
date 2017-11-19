@@ -163,7 +163,7 @@ make %{?_smp_mflags}
         --http-scgi-temp-path=%{_localstatedir}/cache/nginx/scgi_temp \
         --user=%{nginx_user} \
         --group=%{nginx_group} \
-        --debug \
+        --with-debug \
         --with-http_ssl_module \
         --with-http_realip_module \
         --with-http_addition_module \
